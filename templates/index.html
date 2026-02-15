@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mini Dictionary</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; }
+    input { padding: 8px; width: 200px; }
+    button { padding: 8px 12px; }
+    .result { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Mini Dictionary 🔎</h2>
+
+  <input id="wordInput" placeholder="Enter a word" />
+  <button onclick="search()">Search</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    async function search() {
+      const word = document.getElementById("wordInput").value;
+      const res = await fetch(`http://127.0.0.1:5000/${word}`);
+      const data = await res.json();
+
+      document.getElementById("result").innerHTML = `
+  <p><b>Word:</b> ${data["Word"]}</p>
+  <p><b>Part of Speech:</b> ${data["Part of speech"]}</p>
+  <p><b>Meaning:</b> ${data["Meaning"]}</p>
+`;
+
+    }
+  </script>
+</body>
+</html>
